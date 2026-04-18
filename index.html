@@ -3,24 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Рекорды недели</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Климэйт — Рекорды недели</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0b0e;
-    --surface: #111318;
-    --surface2: #181c24;
-    --border: #1e2433;
+    --dark1: #21304E;
+    --dark2: #3C4652;
+    --blue1: #1D4481;
+    --blue2: #4699C5;
+    --blue3: #00b7f4;
+    --bg: #111820;
+    --surface: #1a2540;
+    --surface2: #1e2d4e;
+    --border: #2a3d5e;
+    --text: #f0f4ff;
+    --muted: #8fa8c8;
+    --muted2: #b0c4de;
     --gold: #f5c542;
-    --gold-dim: #c49a1a;
-    --accent-g: #4ade80;
-    --accent-a: #60a5fa;
-    --accent-shared: #f472b6;
-    --accent-leads: #a78bfa;
-    --accent-total: #fb923c;
-    --text: #f0f2f8;
-    --muted: #6b7280;
-    --muted2: #9ca3af;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,358 +27,667 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     min-height: 100vh;
-    padding: 48px 32px;
+    padding: 0 0 60px;
     background-image:
-      radial-gradient(ellipse 80% 40% at 50% -10%, rgba(245,197,66,0.07) 0%, transparent 60%),
-      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.015) 80px),
-      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.015) 80px);
+      radial-gradient(ellipse 100% 50% at 50% 0%, rgba(0,183,244,0.08) 0%, transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.02) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.02) 60px);
   }
 
-  .page-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(42px, 7vw, 80px);
-    letter-spacing: 0.08em;
-    color: var(--gold);
-    text-align: center;
-    line-height: 1;
-    margin-bottom: 6px;
-    text-shadow: 0 0 60px rgba(245,197,66,0.25);
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--dark1) 0%, #0d1a30 100%);
+    border-bottom: 2px solid var(--blue2);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 30px rgba(0,183,244,0.12);
   }
 
-  .page-sub {
-    text-align: center;
-    font-size: 12px;
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  /* SVG Logo — K chevron shape */
+  .logo-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .brand-name span {
+    color: var(--blue3);
+  }
+  .brand-sub {
+    font-size: 10px;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 56px;
+    margin-top: 3px;
+    font-weight: 500;
   }
 
-  /* ── Section headers ── */
-  .section-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 18px;
-    padding-left: 2px;
+  .header-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
   }
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 6px;
+
+  .page-title-text {
+    text-align: right;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    font-weight: 500;
+  }
+
+  /* ── EDIT BUTTON ── */
+  .btn-edit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue1);
+    border: 1px solid var(--blue2);
+    color: var(--text);
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-edit:hover {
+    background: var(--blue2);
+    border-color: var(--blue3);
+    box-shadow: 0 0 16px rgba(0,183,244,0.3);
+  }
+  .btn-edit.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #111;
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    padding: 40px 48px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-dot {
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
+    flex-shrink: 0;
   }
-  .section-label.georgiy::before  { background: var(--accent-g); box-shadow: 0 0 8px var(--accent-g); }
-  .section-label.anna::before     { background: var(--accent-a); box-shadow: 0 0 8px var(--accent-a); }
-  .section-label.shared::before   { background: var(--accent-shared); box-shadow: 0 0 8px var(--accent-shared); }
-  .section-label.leads::before    { background: var(--accent-leads); box-shadow: 0 0 8px var(--accent-leads); }
-  .section-label.totals::before   { background: var(--accent-total); box-shadow: 0 0 8px var(--accent-total); }
 
-  /* ── Grid ── */
-  .grid-4 {
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── GRID ── */
+  .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 48px;
-  }
-  .grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 48px;
-  }
-  .grid-4x2 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 48px;
+    gap: 18px;
   }
 
-  @media (max-width: 900px) {
-    .grid-4, .grid-4x2 { grid-template-columns: repeat(2, 1fr); }
-    .grid-3            { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 520px) {
-    .grid-4, .grid-4x2, .grid-3 { grid-template-columns: 1fr; }
-    body { padding: 28px 16px; }
-  }
+  @media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px)  { .grid { grid-template-columns: 1fr; } .content { padding: 24px 16px; } .header { padding: 20px 16px; flex-direction: column; gap: 16px; align-items: flex-start; } }
 
-  /* ── Card ── */
+  /* ── CARD ── */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 22px 24px 20px;
+    border-radius: 10px;
+    padding: 28px 26px 24px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s, border-color 0.2s;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    cursor: default;
   }
   .card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(245,197,66,0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
   }
-  .card::before {
+  .card::after {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
-    border-radius: 14px 14px 0 0;
+    height: 3px;
+    border-radius: 10px 10px 0 0;
   }
-  .card.georgiy::before  { background: linear-gradient(90deg, transparent, var(--accent-g), transparent); }
-  .card.anna::before     { background: linear-gradient(90deg, transparent, var(--accent-a), transparent); }
-  .card.shared::before   { background: linear-gradient(90deg, transparent, var(--accent-shared), transparent); }
-  .card.leads::before    { background: linear-gradient(90deg, transparent, var(--accent-leads), transparent); }
-  .card.totals::before   { background: linear-gradient(90deg, transparent, var(--accent-total), transparent); }
+
+  /* Color themes */
+  .card.shared   { border-color: rgba(0,183,244,0.35); }
+  .card.shared::after { background: linear-gradient(90deg, transparent, var(--blue3), transparent); }
+  .card.shared:hover { box-shadow: 0 12px 40px rgba(0,183,244,0.15); border-color: var(--blue3); }
+
+  .card.georgiy  { border-color: rgba(70,153,197,0.3); }
+  .card.georgiy::after { background: linear-gradient(90deg, transparent, var(--blue2), transparent); }
+  .card.georgiy:hover { box-shadow: 0 12px 40px rgba(70,153,197,0.15); border-color: var(--blue2); }
+
+  .card.anna     { border-color: rgba(29,68,129,0.5); }
+  .card.anna::after { background: linear-gradient(90deg, transparent, #6ab0e8, transparent); }
+  .card.anna:hover { box-shadow: 0 12px 40px rgba(29,68,129,0.25); border-color: #6ab0e8; }
+
+  .card.leads    { border-color: rgba(0,183,244,0.25); }
+  .card.leads::after { background: linear-gradient(90deg, transparent, #5de0ff, transparent); }
+  .card.leads:hover { border-color: #5de0ff; }
+
+  .card.totals   { border-color: rgba(245,197,66,0.3); }
+  .card.totals::after { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .card.totals:hover { box-shadow: 0 12px 40px rgba(245,197,66,0.12); border-color: var(--gold); }
+
+  /* BG watermark */
+  .card-watermark {
+    position: absolute;
+    bottom: -10px;
+    right: -4px;
+    font-size: 90px;
+    font-weight: 900;
+    opacity: 0.04;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.05em;
+  }
 
   .card-label {
-    font-size: 10px;
-    letter-spacing: 0.22em;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 10px;
-    font-weight: 600;
+    margin-bottom: 14px;
   }
 
   .card-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 46px;
+    font-size: 64px;
+    font-weight: 900;
     line-height: 1;
-    letter-spacing: 0.04em;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
   }
-  .card.georgiy  .card-value { color: var(--accent-g); }
-  .card.anna     .card-value { color: var(--accent-a); }
-  .card.shared   .card-value { color: var(--accent-shared); }
-  .card.leads    .card-value { color: var(--accent-leads); }
-  .card.totals   .card-value { color: var(--accent-total); }
-
   .card-value .unit {
-    font-size: 22px;
-    opacity: 0.7;
-    margin-left: 2px;
+    font-size: 32px;
+    font-weight: 700;
+    opacity: 0.65;
+    margin-left: 3px;
   }
+
+  .card.shared   .card-value { color: var(--blue3); }
+  .card.georgiy  .card-value { color: var(--blue2); }
+  .card.anna     .card-value { color: #6ab0e8; }
+  .card.leads    .card-value { color: #5de0ff; }
+  .card.totals   .card-value { color: var(--gold); }
 
   .card-date {
-    font-size: 11px;
-    color: var(--muted2);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
+    font-size: 12px;
     font-weight: 500;
+    color: var(--muted2);
   }
-  .card-date::before {
-    content: '📅';
-    font-size: 10px;
-  }
-
-  /* ── Trophy icon on big cards ── */
-  .trophy {
-    position: absolute;
-    top: 18px;
-    right: 20px;
-    font-size: 22px;
-    opacity: 0.18;
-    pointer-events: none;
+  .card-date-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
   }
 
-  /* ── Divider ── */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0 0 48px;
+  /* ── EDIT MODE ── */
+  body.edit-mode .card {
+    cursor: grab;
+    border-style: dashed !important;
+    border-color: rgba(245,197,66,0.4) !important;
+  }
+  body.edit-mode .card:hover {
+    border-color: var(--gold) !important;
+    box-shadow: 0 0 20px rgba(245,197,66,0.2) !important;
+    transform: none;
+  }
+  body.edit-mode .card.dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+  }
+  body.edit-mode .card.drag-over {
+    border-color: var(--gold) !important;
+    box-shadow: 0 0 24px rgba(245,197,66,0.4) !important;
+    transform: scale(1.02);
   }
 
-  /* ── Footer ── */
-  .footer {
+  .edit-hint {
+    display: none;
     text-align: center;
-    font-size: 11px;
-    color: var(--muted);
+    font-size: 12px;
     letter-spacing: 0.15em;
-    margin-top: 24px;
+    color: var(--gold);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px dashed rgba(245,197,66,0.35);
+    border-radius: 6px;
+    background: rgba(245,197,66,0.04);
+  }
+  body.edit-mode .edit-hint { display: block; }
+
+  /* ── TROPHY BADGE ── */
+  .trophy-badge {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    font-size: 18px;
+    opacity: 0.22;
   }
 </style>
 </head>
 <body>
 
-<h1 class="page-title">Рекорды недели</h1>
-<p class="page-sub">Лучшие показатели за всё время</p>
+<!-- HEADER -->
+<header class="header">
+  <div class="logo-area">
+    <svg class="logo-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="52" height="52" rx="6" fill="#1D4481"/>
+      <!-- K chevrons -->
+      <polygon points="10,12 20,12 32,26 20,40 10,40 22,26" fill="#4699C5"/>
+      <polygon points="20,12 30,12 42,26 30,40 20,40 32,26" fill="#00b7f4"/>
+      <polygon points="10,12 18,12 26,22 18,32 10,32 18,22" fill="#21304E"/>
+    </svg>
+    <div>
+      <div class="brand-name">Клим<span>эйт</span></div>
+      <div class="brand-sub">Эксплуатация</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="page-title-text">Рекорды<br>недели</div>
+    <button class="btn-edit" id="editBtn" onclick="toggleEdit()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Редактировать
+    </button>
+  </div>
+</header>
 
-<!-- ═══════════════════════════ ГЕОРГИЙ ═══════════════════════════ -->
-<div class="section-label georgiy">Личные рекорды — Георгий</div>
-<div class="grid-4">
+<div class="content">
 
-  <div class="card georgiy">
-    <div class="trophy">🏆</div>
-    <div class="card-label">КП</div>
-    <div class="card-value">47</div>
-    <div class="card-date">12 марта 2025</div>
+  <!-- HINT -->
+  <div class="edit-hint">✦ Перетащите карточки, чтобы изменить порядок. Нажмите «Готово» когда закончите.</div>
+
+  <!-- ══════════ ОБЩИЕ РЕКОРДЫ ══════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-dot" style="background:#00b7f4;box-shadow:0 0 8px #00b7f4;"></div>
+      <div class="section-title">Общие рекорды</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid" id="grid-shared">
+
+      <div class="card shared" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">КП</div>
+        <div class="card-label">КП</div>
+        <div class="card-value">96</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          19 января 2025
+        </div>
+      </div>
+
+      <div class="card shared" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">П</div>
+        <div class="card-label">Повторы</div>
+        <div class="card-value">59</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          8 марта 2025
+        </div>
+      </div>
+
+      <div class="card shared" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">ПР</div>
+        <div class="card-label">Продажи</div>
+        <div class="card-value">38</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          26 ноября 2024
+        </div>
+      </div>
+
+      <div class="card shared" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">В</div>
+        <div class="card-label">Выручка</div>
+        <div class="card-value">1.6<span class="unit">м</span></div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          3 апреля 2025
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="card georgiy">
-    <div class="trophy">🏆</div>
-    <div class="card-label">Повторы</div>
-    <div class="card-value">31</div>
-    <div class="card-date">5 февраля 2025</div>
+  <!-- ══════════ ГЕОРГИЙ ══════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-dot" style="background:#4699C5;box-shadow:0 0 8px #4699C5;"></div>
+      <div class="section-title">Личные рекорды — Георгий</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid" id="grid-georgiy">
+
+      <div class="card georgiy" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">КП</div>
+        <div class="card-label">КП</div>
+        <div class="card-value">47</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          12 марта 2025
+        </div>
+      </div>
+
+      <div class="card georgiy" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">П</div>
+        <div class="card-label">Повторы</div>
+        <div class="card-value">31</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          5 февраля 2025
+        </div>
+      </div>
+
+      <div class="card georgiy" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">ПР</div>
+        <div class="card-label">Продажи</div>
+        <div class="card-value">19</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          26 ноября 2024
+        </div>
+      </div>
+
+      <div class="card georgiy" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">В</div>
+        <div class="card-label">Выручка</div>
+        <div class="card-value">842<span class="unit">к</span></div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          3 апреля 2025
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="card georgiy">
-    <div class="trophy">🏆</div>
-    <div class="card-label">Продажи</div>
-    <div class="card-value">19</div>
-    <div class="card-date">26 ноября 2024</div>
+  <!-- ══════════ АННА ══════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-dot" style="background:#6ab0e8;box-shadow:0 0 8px #6ab0e8;"></div>
+      <div class="section-title">Личные рекорды — Анна</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid" id="grid-anna">
+
+      <div class="card anna" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">КП</div>
+        <div class="card-label">КП</div>
+        <div class="card-value">53</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          19 января 2025
+        </div>
+      </div>
+
+      <div class="card anna" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">П</div>
+        <div class="card-label">Повторы</div>
+        <div class="card-value">28</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          8 марта 2025
+        </div>
+      </div>
+
+      <div class="card anna" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">ПР</div>
+        <div class="card-label">Продажи</div>
+        <div class="card-value">22</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          14 октября 2024
+        </div>
+      </div>
+
+      <div class="card anna" draggable="true">
+        <div class="trophy-badge">🏆</div>
+        <div class="card-watermark">В</div>
+        <div class="card-label">Выручка</div>
+        <div class="card-value">910<span class="unit">к</span></div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          17 февраля 2025
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="card georgiy">
-    <div class="trophy">🏆</div>
-    <div class="card-label">Выручка</div>
-    <div class="card-value">842<span class="unit">к</span></div>
-    <div class="card-date">3 апреля 2025</div>
+  <!-- ══════════ ЛИДЫ ══════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-dot" style="background:#5de0ff;box-shadow:0 0 8px #5de0ff;"></div>
+      <div class="section-title">Рекорды по лидам</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid" id="grid-leads" style="grid-template-columns: repeat(4,1fr);">
+
+      <div class="card leads" draggable="true">
+        <div class="trophy-badge">📊</div>
+        <div class="card-watermark">РЛ</div>
+        <div class="card-label">Рекламные лиды</div>
+        <div class="card-value">74</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          2 декабря 2024
+        </div>
+      </div>
+
+      <div class="card leads" draggable="true">
+        <div class="trophy-badge">📊</div>
+        <div class="card-watermark">ПЛ</div>
+        <div class="card-label">Повторные лиды</div>
+        <div class="card-value">41</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          10 марта 2025
+        </div>
+      </div>
+
+      <div class="card leads" draggable="true">
+        <div class="trophy-badge">📊</div>
+        <div class="card-watermark">ОЛ</div>
+        <div class="card-label">Общее кол-во лидов</div>
+        <div class="card-value">112</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          28 января 2025
+        </div>
+      </div>
+
+      <!-- пустая ячейка для 4-й позиции -->
+      <div style="visibility:hidden;"></div>
+
+    </div>
   </div>
 
-</div>
+  <!-- ══════════ ФИНАНСОВЫЕ ИТОГИ ══════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-dot" style="background:#f5c542;box-shadow:0 0 8px #f5c542;"></div>
+      <div class="section-title">Финансовые рекорды</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid" id="grid-totals">
 
-<!-- ═══════════════════════════ АННА ═══════════════════════════ -->
-<div class="section-label anna">Личные рекорды — Анна</div>
-<div class="grid-4">
+      <div class="card totals" draggable="true">
+        <div class="trophy-badge">💰</div>
+        <div class="card-watermark">ОВ</div>
+        <div class="card-label">Общая выручка</div>
+        <div class="card-value">2.4<span class="unit">м</span></div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          3 апреля 2025
+        </div>
+      </div>
 
-  <div class="card anna">
-    <div class="trophy">🏆</div>
-    <div class="card-label">КП</div>
-    <div class="card-value">53</div>
-    <div class="card-date">19 января 2025</div>
+      <div class="card totals" draggable="true">
+        <div class="trophy-badge">💰</div>
+        <div class="card-watermark">ОП</div>
+        <div class="card-label">Общие продажи</div>
+        <div class="card-value">63</div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          18 февраля 2025
+        </div>
+      </div>
+
+      <div class="card totals" draggable="true">
+        <div class="trophy-badge">💰</div>
+        <div class="card-watermark">ВЫ</div>
+        <div class="card-label">Общая выработка</div>
+        <div class="card-value">1.1<span class="unit">м</span></div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          11 января 2025
+        </div>
+      </div>
+
+      <div class="card totals" draggable="true">
+        <div class="trophy-badge">💰</div>
+        <div class="card-watermark">УС</div>
+        <div class="card-label">Выработка услуги</div>
+        <div class="card-value">680<span class="unit">к</span></div>
+        <div class="card-date">
+          <svg class="card-date-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          25 марта 2025
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="card anna">
-    <div class="trophy">🏆</div>
-    <div class="card-label">Повторы</div>
-    <div class="card-value">28</div>
-    <div class="card-date">8 марта 2025</div>
-  </div>
+</div><!-- /content -->
 
-  <div class="card anna">
-    <div class="trophy">🏆</div>
-    <div class="card-label">Продажи</div>
-    <div class="card-value">22</div>
-    <div class="card-date">14 октября 2024</div>
-  </div>
+<script>
+  let editMode = false;
+  let dragSrc = null;
 
-  <div class="card anna">
-    <div class="trophy">🏆</div>
-    <div class="card-label">Выручка</div>
-    <div class="card-value">910<span class="unit">к</span></div>
-    <div class="card-date">17 февраля 2025</div>
-  </div>
+  function toggleEdit() {
+    editMode = !editMode;
+    const btn = document.getElementById('editBtn');
+    if (editMode) {
+      document.body.classList.add('edit-mode');
+      btn.classList.add('active');
+      btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Готово`;
+    } else {
+      document.body.classList.remove('edit-mode');
+      btn.classList.remove('active');
+      btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Редактировать`;
+    }
+  }
 
-</div>
+  // Drag-and-drop within each grid
+  document.querySelectorAll('.grid').forEach(grid => {
+    grid.addEventListener('dragstart', e => {
+      if (!editMode) { e.preventDefault(); return; }
+      const card = e.target.closest('.card');
+      if (!card) return;
+      dragSrc = card;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
 
-<hr class="divider">
+    grid.addEventListener('dragend', e => {
+      const card = e.target.closest('.card');
+      if (card) card.classList.remove('dragging');
+      grid.querySelectorAll('.card').forEach(c => c.classList.remove('drag-over'));
+    });
 
-<!-- ═══════════════════════════ ОБЩИЕ ═══════════════════════════ -->
-<div class="section-label shared">Общие рекорды</div>
-<div class="grid-4">
+    grid.addEventListener('dragover', e => {
+      if (!editMode || !dragSrc) return;
+      e.preventDefault();
+      const target = e.target.closest('.card');
+      if (!target || target === dragSrc) return;
+      grid.querySelectorAll('.card').forEach(c => c.classList.remove('drag-over'));
+      target.classList.add('drag-over');
+    });
 
-  <div class="card shared">
-    <div class="trophy">🏆</div>
-    <div class="card-label">КП</div>
-    <div class="card-value">96</div>
-    <div class="card-date">19 января 2025</div>
-  </div>
+    grid.addEventListener('drop', e => {
+      if (!editMode || !dragSrc) return;
+      e.preventDefault();
+      const target = e.target.closest('.card');
+      if (!target || target === dragSrc) return;
+      target.classList.remove('drag-over');
 
-  <div class="card shared">
-    <div class="trophy">🏆</div>
-    <div class="card-label">Повторы</div>
-    <div class="card-value">59</div>
-    <div class="card-date">8 марта 2025</div>
-  </div>
-
-  <div class="card shared">
-    <div class="trophy">🏆</div>
-    <div class="card-label">Продажи</div>
-    <div class="card-value">38</div>
-    <div class="card-date">26 ноября 2024</div>
-  </div>
-
-  <div class="card shared">
-    <div class="trophy">🏆</div>
-    <div class="card-label">Выручка</div>
-    <div class="card-value">1.6<span class="unit">м</span></div>
-    <div class="card-date">3 апреля 2025</div>
-  </div>
-
-</div>
-
-<!-- ═══════════════════════════ ЛИДЫ ═══════════════════════════ -->
-<div class="section-label leads">Рекорды по лидам</div>
-<div class="grid-3">
-
-  <div class="card leads">
-    <div class="trophy">📊</div>
-    <div class="card-label">Рекламные лиды</div>
-    <div class="card-value">74</div>
-    <div class="card-date">2 декабря 2024</div>
-  </div>
-
-  <div class="card leads">
-    <div class="trophy">📊</div>
-    <div class="card-label">Повторные лиды</div>
-    <div class="card-value">41</div>
-    <div class="card-date">10 марта 2025</div>
-  </div>
-
-  <div class="card leads">
-    <div class="trophy">📊</div>
-    <div class="card-label">Общее кол-во лидов</div>
-    <div class="card-value">112</div>
-    <div class="card-date">28 января 2025</div>
-  </div>
-
-</div>
-
-<hr class="divider">
-
-<!-- ═══════════════════════════ ИТОГИ ═══════════════════════════ -->
-<div class="section-label totals">Общие финансовые рекорды</div>
-<div class="grid-4x2">
-
-  <div class="card totals">
-    <div class="trophy">💰</div>
-    <div class="card-label">Общая выручка</div>
-    <div class="card-value">2.4<span class="unit">м</span></div>
-    <div class="card-date">3 апреля 2025</div>
-  </div>
-
-  <div class="card totals">
-    <div class="trophy">💰</div>
-    <div class="card-label">Общие продажи</div>
-    <div class="card-value">63</div>
-    <div class="card-date">18 февраля 2025</div>
-  </div>
-
-  <div class="card totals">
-    <div class="trophy">💰</div>
-    <div class="card-label">Общая выработка</div>
-    <div class="card-value">1.1<span class="unit">м</span></div>
-    <div class="card-date">11 января 2025</div>
-  </div>
-
-  <div class="card totals">
-    <div class="trophy">💰</div>
-    <div class="card-label">Выработка услуги</div>
-    <div class="card-value">680<span class="unit">к</span></div>
-    <div class="card-date">25 марта 2025</div>
-  </div>
-
-</div>
-
-<p class="footer">обновлено вручную · рекорды за всё время</p>
+      // Swap
+      const allCards = [...grid.querySelectorAll('.card')];
+      const srcIdx = allCards.indexOf(dragSrc);
+      const tgtIdx = allCards.indexOf(target);
+      if (srcIdx < tgtIdx) {
+        grid.insertBefore(dragSrc, target.nextSibling);
+      } else {
+        grid.insertBefore(dragSrc, target);
+      }
+      dragSrc = null;
+    });
+  });
+</script>
 
 </body>
 </html>
