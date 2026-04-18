@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рекорды недели</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0e;
+    --surface: #111318;
+    --surface2: #181c24;
+    --border: #1e2433;
+    --gold: #f5c542;
+    --gold-dim: #c49a1a;
+    --accent-g: #4ade80;
+    --accent-a: #60a5fa;
+    --accent-shared: #f472b6;
+    --accent-leads: #a78bfa;
+    --accent-total: #fb923c;
+    --text: #f0f2f8;
+    --muted: #6b7280;
+    --muted2: #9ca3af;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    padding: 48px 32px;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% -10%, rgba(245,197,66,0.07) 0%, transparent 60%),
+      repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.015) 80px),
+      repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.015) 80px);
+  }
+
+  .page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 7vw, 80px);
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 6px;
+    text-shadow: 0 0 60px rgba(245,197,66,0.25);
+  }
+
+  .page-sub {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 56px;
+  }
+
+  /* ── Section headers ── */
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+    padding-left: 2px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .section-label.georgiy::before  { background: var(--accent-g); box-shadow: 0 0 8px var(--accent-g); }
+  .section-label.anna::before     { background: var(--accent-a); box-shadow: 0 0 8px var(--accent-a); }
+  .section-label.shared::before   { background: var(--accent-shared); box-shadow: 0 0 8px var(--accent-shared); }
+  .section-label.leads::before    { background: var(--accent-leads); box-shadow: 0 0 8px var(--accent-leads); }
+  .section-label.totals::before   { background: var(--accent-total); box-shadow: 0 0 8px var(--accent-total); }
+
+  /* ── Grid ── */
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .grid-4x2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  @media (max-width: 900px) {
+    .grid-4, .grid-4x2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3            { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .grid-4, .grid-4x2, .grid-3 { grid-template-columns: 1fr; }
+    body { padding: 28px 16px; }
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(245,197,66,0.2);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: 14px 14px 0 0;
+  }
+  .card.georgiy::before  { background: linear-gradient(90deg, transparent, var(--accent-g), transparent); }
+  .card.anna::before     { background: linear-gradient(90deg, transparent, var(--accent-a), transparent); }
+  .card.shared::before   { background: linear-gradient(90deg, transparent, var(--accent-shared), transparent); }
+  .card.leads::before    { background: linear-gradient(90deg, transparent, var(--accent-leads), transparent); }
+  .card.totals::before   { background: linear-gradient(90deg, transparent, var(--accent-total), transparent); }
+
+  .card-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .card-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 46px;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+  .card.georgiy  .card-value { color: var(--accent-g); }
+  .card.anna     .card-value { color: var(--accent-a); }
+  .card.shared   .card-value { color: var(--accent-shared); }
+  .card.leads    .card-value { color: var(--accent-leads); }
+  .card.totals   .card-value { color: var(--accent-total); }
+
+  .card-value .unit {
+    font-size: 22px;
+    opacity: 0.7;
+    margin-left: 2px;
+  }
+
+  .card-date {
+    font-size: 11px;
+    color: var(--muted2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+  }
+  .card-date::before {
+    content: '📅';
+    font-size: 10px;
+  }
+
+  /* ── Trophy icon on big cards ── */
+  .trophy {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 22px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 0 48px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Рекорды недели</h1>
+<p class="page-sub">Лучшие показатели за всё время</p>
+
+<!-- ═══════════════════════════ ГЕОРГИЙ ═══════════════════════════ -->
+<div class="section-label georgiy">Личные рекорды — Георгий</div>
+<div class="grid-4">
+
+  <div class="card georgiy">
+    <div class="trophy">🏆</div>
+    <div class="card-label">КП</div>
+    <div class="card-value">47</div>
+    <div class="card-date">12 марта 2025</div>
+  </div>
+
+  <div class="card georgiy">
+    <div class="trophy">🏆</div>
+    <div class="card-label">Повторы</div>
+    <div class="card-value">31</div>
+    <div class="card-date">5 февраля 2025</div>
+  </div>
+
+  <div class="card georgiy">
+    <div class="trophy">🏆</div>
+    <div class="card-label">Продажи</div>
+    <div class="card-value">19</div>
+    <div class="card-date">26 ноября 2024</div>
+  </div>
+
+  <div class="card georgiy">
+    <div class="trophy">🏆</div>
+    <div class="card-label">Выручка</div>
+    <div class="card-value">842<span class="unit">к</span></div>
+    <div class="card-date">3 апреля 2025</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════ АННА ═══════════════════════════ -->
+<div class="section-label anna">Личные рекорды — Анна</div>
+<div class="grid-4">
+
+  <div class="card anna">
+    <div class="trophy">🏆</div>
+    <div class="card-label">КП</div>
+    <div class="card-value">53</div>
+    <div class="card-date">19 января 2025</div>
+  </div>
+
+  <div class="card anna">
+    <div class="trophy">🏆</div>
+    <div class="card-label">Повторы</div>
+    <div class="card-value">28</div>
+    <div class="card-date">8 марта 2025</div>
+  </div>
+
+  <div class="card anna">
+    <div class="trophy">🏆</div>
+    <div class="card-label">Продажи</div>
+    <div class="card-value">22</div>
+    <div class="card-date">14 октября 2024</div>
+  </div>
+
+  <div class="card anna">
+    <div class="trophy">🏆</div>
+    <div class="card-label">Выручка</div>
+    <div class="card-value">910<span class="unit">к</span></div>
+    <div class="card-date">17 февраля 2025</div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════ ОБЩИЕ ═══════════════════════════ -->
+<div class="section-label shared">Общие рекорды</div>
+<div class="grid-4">
+
+  <div class="card shared">
+    <div class="trophy">🏆</div>
+    <div class="card-label">КП</div>
+    <div class="card-value">96</div>
+    <div class="card-date">19 января 2025</div>
+  </div>
+
+  <div class="card shared">
+    <div class="trophy">🏆</div>
+    <div class="card-label">Повторы</div>
+    <div class="card-value">59</div>
+    <div class="card-date">8 марта 2025</div>
+  </div>
+
+  <div class="card shared">
+    <div class="trophy">🏆</div>
+    <div class="card-label">Продажи</div>
+    <div class="card-value">38</div>
+    <div class="card-date">26 ноября 2024</div>
+  </div>
+
+  <div class="card shared">
+    <div class="trophy">🏆</div>
+    <div class="card-label">Выручка</div>
+    <div class="card-value">1.6<span class="unit">м</span></div>
+    <div class="card-date">3 апреля 2025</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════ ЛИДЫ ═══════════════════════════ -->
+<div class="section-label leads">Рекорды по лидам</div>
+<div class="grid-3">
+
+  <div class="card leads">
+    <div class="trophy">📊</div>
+    <div class="card-label">Рекламные лиды</div>
+    <div class="card-value">74</div>
+    <div class="card-date">2 декабря 2024</div>
+  </div>
+
+  <div class="card leads">
+    <div class="trophy">📊</div>
+    <div class="card-label">Повторные лиды</div>
+    <div class="card-value">41</div>
+    <div class="card-date">10 марта 2025</div>
+  </div>
+
+  <div class="card leads">
+    <div class="trophy">📊</div>
+    <div class="card-label">Общее кол-во лидов</div>
+    <div class="card-value">112</div>
+    <div class="card-date">28 января 2025</div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════ ИТОГИ ═══════════════════════════ -->
+<div class="section-label totals">Общие финансовые рекорды</div>
+<div class="grid-4x2">
+
+  <div class="card totals">
+    <div class="trophy">💰</div>
+    <div class="card-label">Общая выручка</div>
+    <div class="card-value">2.4<span class="unit">м</span></div>
+    <div class="card-date">3 апреля 2025</div>
+  </div>
+
+  <div class="card totals">
+    <div class="trophy">💰</div>
+    <div class="card-label">Общие продажи</div>
+    <div class="card-value">63</div>
+    <div class="card-date">18 февраля 2025</div>
+  </div>
+
+  <div class="card totals">
+    <div class="trophy">💰</div>
+    <div class="card-label">Общая выработка</div>
+    <div class="card-value">1.1<span class="unit">м</span></div>
+    <div class="card-date">11 января 2025</div>
+  </div>
+
+  <div class="card totals">
+    <div class="trophy">💰</div>
+    <div class="card-label">Выработка услуги</div>
+    <div class="card-value">680<span class="unit">к</span></div>
+    <div class="card-date">25 марта 2025</div>
+  </div>
+
+</div>
+
+<p class="footer">обновлено вручную · рекорды за всё время</p>
+
+</body>
+</html>
